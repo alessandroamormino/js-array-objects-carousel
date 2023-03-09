@@ -51,12 +51,15 @@ AL CLICK DELLA FRECCIA IN ALTO
         - assegno la classe active 
         - rimuovo la classe active dall'indice successivo
 
-BONUS: 
+BONUS 1: 
 AL CLICK DELL'IMMAGINE THUMBNAIL
     - Cambio la src dell'immagine principale espansa (carousel) sulla base della proprietà image dell'oggetto
     - rimuovo la classe active dalle immagini
     - assegno la classe active all'immagine thumbnail selezionata
     - setto l'indice sulla base dell'immagine corrente
+
+BONUS 2: AUTOPLAY
+- creo una funzione che cambi la mia immagine aumentando l'indice corrente dopo 3 secondi
 */
 
 // CODE: 
@@ -166,6 +169,57 @@ images.forEach((element, i) => {
 
 // // - AL CLICK della freccia in basso 
 arrowBottomEl.addEventListener('click', () => {
+    incrementImg();
+});
+
+// - AL CLICK della freccia in alto 
+arrowTopEl.addEventListener('click', () => {
+    decrementImg();
+});
+
+
+// BONUS 2: AUTOPLAY
+// - creo una funzione che cambi la mia immagine aumentando l'indice corrente dopo 3 secondi
+const autoplay = setInterval(incrementImg, 3000);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// FUNCTIONS
+
+function incrementImg(){
     // aumento l'indice
     index++;
 
@@ -185,15 +239,9 @@ arrowBottomEl.addEventListener('click', () => {
         // scrivo informazioni dell'immagine
         layerEl.innerHTML = `<h2>${images[index].title}</h2><br><h3>${images[index].text}</h3>`;
     }
-});
+}
 
-
-
-// - AL CLICK della freccia in alto 
-arrowTopEl.addEventListener('click', () => {
-
-    // ? SE l'indice raggiunge la prima immagine disponibile nell'array
-
+function decrementImg(){
     // diminuisco l'indice
     index--;
 
@@ -213,5 +261,4 @@ arrowTopEl.addEventListener('click', () => {
         // scrivo informazioni dell'immagine
         layerEl.innerHTML = `<h2>${images[index].title}</h2><br><h3>${images[index].text}</h3>`;
     }
-
-});
+}
