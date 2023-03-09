@@ -101,12 +101,15 @@ const arrowBottomEl = document.getElementById('arrow-bottom');
 const thumbContainerEl = document.getElementById('thumbnails-container');
 let imgSelectedEl;
 
+// - creo una variabile indice
+let index = 0;
+
 // - inserire l'ìmmagine di partenza nel carousel
 // parto da quella centrale per styling
 carouselImgEl.src = images[0].image;
 
 // - reperisco la src delle immagini dall'array di oggetti
-images.forEach((element) => {
+images.forEach((element, i) => {
     for(let key in element){
         if(key == 'image'){
             // - creo n div quante sono le immagini (5) nell'array
@@ -138,6 +141,9 @@ images.forEach((element) => {
 
                 // - assegno la classe active all'immagine thumbnail selezionata
                 this.classList.add('active');
+
+                // setto l'indice corrente
+                index = i;
             });
         }
     }
@@ -147,8 +153,7 @@ images.forEach((element) => {
 // imgSelectedEl = document.querySelectorAll('.thumbnail img');
 // imgSelectedEl[0].classList.add('active');
 
-// // - creo una variabile indice
-let index = 0;
+
 
 // // - AL CLICK della freccia in basso 
 arrowBottomEl.addEventListener('click', () => {
