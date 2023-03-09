@@ -183,12 +183,12 @@ images.forEach((element, i) => {
 
 // // - AL CLICK della freccia in basso 
 arrowBottomEl.addEventListener('click', () => {
-    incrementImg();
+    incrementImg(images);
 });
 
 // - AL CLICK della freccia in alto 
 arrowTopEl.addEventListener('click', () => {
-    decrementImg();
+    decrementImg(images);
 });
 
 
@@ -243,50 +243,52 @@ btnStopEl.addEventListener('click', () => {
 
 // FUNCTIONS
 
-function incrementImg(){
+function incrementImg(array){
     // aumento l'indice
     index++;
 
-    if(index>images.length-1){
+    if(index>array.length-1){
         // azzero l'indice se ho raggiunto ultima posizione
         index=0;
-        carouselImgEl.src = images[index].image;
+        carouselImgEl.src = array[index].image;
         imgSelectedEl[index].classList.add('active');
-        imgSelectedEl[images.length-1].classList.remove('active');
+        imgSelectedEl[array.length-1].classList.remove('active');
         // scrivo informazioni dell'immagine
-        layerEl.innerHTML = `<h2>${images[index].title}</h2><br><h3>${images[index].text}</h3>`;
+        layerEl.innerHTML = `<h2>${array[index].title}</h2><br><h3>${array[index].text}</h3>`;
     } else {
         // vado avanti
-        carouselImgEl.src = images[index].image;
+        carouselImgEl.src = array[index].image;
         imgSelectedEl[index].classList.add('active');
         imgSelectedEl[index-1].classList.remove('active');
         // scrivo informazioni dell'immagine
-        layerEl.innerHTML = `<h2>${images[index].title}</h2><br><h3>${images[index].text}</h3>`;
+        layerEl.innerHTML = `<h2>${array[index].title}</h2><br><h3>${array[index].text}</h3>`;
     }
 }
 
-function decrementImg(){
+function decrementImg(array){
     // diminuisco l'indice
     index--;
 
     if(index<0){
         // porto l'indice all'ultima posizione e vado indietro
-        index=images.length-1;
-        carouselImgEl.src = images[index].image;
+        index=array.length-1;
+        carouselImgEl.src = array[index].image;
         imgSelectedEl[index].classList.add('active');
         imgSelectedEl[0].classList.remove('active');
         // scrivo informazioni dell'immagine
-        layerEl.innerHTML = `<h2>${images[index].title}</h2><br><h3>${images[index].text}</h3>`;
+        layerEl.innerHTML = `<h2>${array[index].title}</h2><br><h3>${array[index].text}</h3>`;
     } else {
         // vado indietro
-        carouselImgEl.src = images[index].image;
+        carouselImgEl.src = array[index].image;
         imgSelectedEl[index].classList.add('active');
         imgSelectedEl[index+1].classList.remove('active');
         // scrivo informazioni dell'immagine
-        layerEl.innerHTML = `<h2>${images[index].title}</h2><br><h3>${images[index].text}</h3>`;
+        layerEl.innerHTML = `<h2>${array[index].title}</h2><br><h3>${array[index].text}</h3>`;
     }
 }
 
 function autoPlay(){
-    autoplay = setInterval(incrementImg, 3000);
+    autoplay = setInterval(() => {
+        incrementImg(images);
+    }, 3000);
 }
