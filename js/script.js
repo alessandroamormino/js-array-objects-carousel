@@ -202,12 +202,6 @@ autoPlay();
 
 
 // BONUS 3: BUTTONS
-// AL CLICK DEL BOTTONE START
-btnStartEl.addEventListener('click', () => {
-    //  - faccio partire la funzione autoplay
-    autoPlay();
-});
-
 // AL CLICK DEL BOTTONE STOP
 btnStopEl.addEventListener('click', () => {
     // - fermo la funzione autoplay
@@ -215,9 +209,20 @@ btnStopEl.addEventListener('click', () => {
     clearInterval(playReverse);
 });
 
+// AL CLICK DEL BOTTONE START
+btnStartEl.addEventListener('click', () => {
+    // fermo la funzione playreverse
+    clearInterval(playReverse);
+    //  - faccio partire la funzione autoplay
+    autoPlay();
+});
+
+
 // AL CLICK DEL BOTTONE REVERSE
 btnReverseEl.addEventListener('click', () => {
     // - fermo la funzione autoplay
+    clearInterval(play);
+    // - faccio partire la funzione playreverse
     autoPlayReverse();
 });
 
