@@ -36,6 +36,8 @@
 }
 
 .carousel{
+    position: relative;
+
     width: 100%;
     height: 100%;
 }
@@ -45,6 +47,17 @@
     height: 100%;
     object-fit: cover;
     object-position: 80% 30%;
+}
+
+.carousel-left .carousel .info{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+
+    color: white;
+    text-align: right;
+    padding: 1em;
+    background-color: rgba(0, 0, 0, .3);
 }
 
 .carousel-right  .arrow {

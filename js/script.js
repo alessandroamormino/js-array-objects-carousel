@@ -56,6 +56,7 @@ AL CLICK DELL'IMMAGINE THUMBNAIL
     - Cambio la src dell'immagine principale espansa (carousel) sulla base della proprietà image dell'oggetto
     - rimuovo la classe active dalle immagini
     - assegno la classe active all'immagine thumbnail selezionata
+    - setto l'indice sulla base dell'immagine corrente
 */
 
 // CODE: 
@@ -99,59 +100,67 @@ const carouselImgEl = document.getElementById('carousel-img');
 const arrowTopEl = document.getElementById('arrow-top');
 const arrowBottomEl = document.getElementById('arrow-bottom');
 const thumbContainerEl = document.getElementById('thumbnails-container');
+const carouselContainer = document.querySelector('.carousel');
 let imgSelectedEl;
 
 // - creo una variabile indice
 let index = 0;
 
+// creo un layer contenente le informazioni dell'immagine
+const layerEl = document.createElement('div');
+layerEl.classList.add('info');
+carouselContainer.append(layerEl);
+
 // - inserire l'ìmmagine di partenza nel carousel
 // parto da quella centrale per styling
 carouselImgEl.src = images[0].image;
 
+// scrivo informazioni dell'immagine di partenza
+layerEl.innerHTML = `<h2>${images[index].title}</h2><br><h3>${images[index].text}</h3>`;
+
+
 // - reperisco la src delle immagini dall'array di oggetti
 images.forEach((element, i) => {
-    for(let key in element){
-        if(key == 'image'){
-            // - creo n div quante sono le immagini (5) nell'array
-            const newThumbnailEl = document.createElement('div');
-            thumbContainerEl.append(newThumbnailEl);
-            newThumbnailEl.classList.add('thumbnail');
-            
-            // - creo n img tag quante sono le immagini (5) nell'array
-            const newImgThumbEl = document.createElement('img');
-            newThumbnailEl.append(newImgThumbEl);
+    // - creo n div quante sono le immagini (5) nell'array
+    const newThumbnailEl = document.createElement('div');
+    thumbContainerEl.append(newThumbnailEl);
+    newThumbnailEl.classList.add('thumbnail');
+    
+    // - creo n img tag quante sono le immagini (5) nell'array
+    const newImgThumbEl = document.createElement('img');
+    newThumbnailEl.append(newImgThumbEl);
 
-            // - inserire le immagini nella thumbnail sulla base delle src dell'array
-            newImgThumbEl.src = element[key];
+    // - inserire le immagini nella thumbnail sulla base delle src dell'array
+    // newImgThumbEl.src = element[key];
+    newImgThumbEl.src = element['image'];
 
-            // Assegno variabile active all'immagine di partenza
-            imgSelectedEl = document.querySelectorAll('.thumbnail img');
-            imgSelectedEl[0].classList.add('active');
+    // Assegno variabile active all'immagine di partenza
+    imgSelectedEl = document.querySelectorAll('.thumbnail img');
+    imgSelectedEl[0].classList.add('active');
 
-            // BONUS 1
-            // AL CLICK DELL'IMMAGINE THUMBNAIL
-            newImgThumbEl.addEventListener('click', function() {
-                // - Cambio la src dell'immagine principale espansa (carousel) sulla base della proprietà image dell'oggetto
-                carouselImgEl.src = element[key];
+    // BONUS 1
+    // AL CLICK DELL'IMMAGINE THUMBNAIL
+    newImgThumbEl.addEventListener('click', function() {
 
-                // - rimuovo la classe active dalle immagini
-                imgSelectedEl.forEach((element) => {
-                    element.classList.remove('active');
-                });
+        // scrivo informazioni dell'immagine
+        layerEl.innerHTML = `<h2>${element.title}</h2><br><h3>${element.text}</h3>`;
 
-                // - assegno la classe active all'immagine thumbnail selezionata
-                this.classList.add('active');
+        // - Cambio la src dell'immagine principale espansa (carousel) sulla base della proprietà image dell'oggetto
+        // carouselImgEl.src = element[key];
+        carouselImgEl.src = element['image'];
 
-                // setto l'indice corrente
-                index = i;
-            });
-        }
-    }
+        // - rimuovo la classe active dalle immagini
+        imgSelectedEl.forEach((element) => {
+            element.classList.remove('active');
+        });
+
+        // - assegno la classe active all'immagine thumbnail selezionata
+        this.classList.add('active');  
+
+        // setto l'indice corrente
+        index = i;
+    });
 });
-
-// Assegno variabile active all'immagine di partenza
-// imgSelectedEl = document.querySelectorAll('.thumbnail img');
-// imgSelectedEl[0].classList.add('active');
 
 
 
@@ -166,11 +175,15 @@ arrowBottomEl.addEventListener('click', () => {
         carouselImgEl.src = images[index].image;
         imgSelectedEl[index].classList.add('active');
         imgSelectedEl[images.length-1].classList.remove('active');
+        // scrivo informazioni dell'immagine
+        layerEl.innerHTML = `<h2>${images[index].title}</h2><br><h3>${images[index].text}</h3>`;
     } else {
         // vado avanti
         carouselImgEl.src = images[index].image;
         imgSelectedEl[index].classList.add('active');
         imgSelectedEl[index-1].classList.remove('active');
+        // scrivo informazioni dell'immagine
+        layerEl.innerHTML = `<h2>${images[index].title}</h2><br><h3>${images[index].text}</h3>`;
     }
 });
 
@@ -190,11 +203,15 @@ arrowTopEl.addEventListener('click', () => {
         carouselImgEl.src = images[index].image;
         imgSelectedEl[index].classList.add('active');
         imgSelectedEl[0].classList.remove('active');
+        // scrivo informazioni dell'immagine
+        layerEl.innerHTML = `<h2>${images[index].title}</h2><br><h3>${images[index].text}</h3>`;
     } else {
         // vado indietro
         carouselImgEl.src = images[index].image;
         imgSelectedEl[index].classList.add('active');
         imgSelectedEl[index+1].classList.remove('active');
+        // scrivo informazioni dell'immagine
+        layerEl.innerHTML = `<h2>${images[index].title}</h2><br><h3>${images[index].text}</h3>`;
     }
 
 });
