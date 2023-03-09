@@ -5,9 +5,30 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JS - Array Object Carousel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
+    <!-- carousel structure -->
+    <div class="container-centered">
+        <div class="container-carousel">
+            <div class="carousel-left">
+                <div class="carousel">
+                    <img id="carousel-img" src="" alt="">
+                </div>
+            </div>
+            <div class="carousel-right">
+                <div id="arrow-top" class="arrow">
+                    <i class="fa-solid fa-circle-up"></i>
+                </div>
+                <div id="thumbnails-container"></div>
+                <div id="arrow-bottom" class="arrow">
+                    <i class="fa-solid fa-circle-down"></i>
+                </div>
+            </div>
+        </div>
+    </div>
     
     <!-- script -->
     <script src="js/script.js"></script>
