@@ -60,7 +60,16 @@ AL CLICK DELL'IMMAGINE THUMBNAIL
 
 BONUS 2: AUTOPLAY
 - creo una funzione che cambi la mia immagine aumentando l'indice corrente dopo 3 secondi
+
+BONUS 3: BUTTONS
+- bersaglio i due bottoni creati nel DOM 
+AL CLICK DEL BOTTONE START
+    - faccio partire la funzione autoplay
+AL CLICK DEL BOTTONE STOP
+    - fermo la funzione autoplay
 */
+
+
 
 // CODE: 
 
@@ -105,6 +114,11 @@ const arrowBottomEl = document.getElementById('arrow-bottom');
 const thumbContainerEl = document.getElementById('thumbnails-container');
 const carouselContainer = document.querySelector('.carousel');
 let imgSelectedEl;
+// dichiaro la variabile che mi servirà per gestire la timing function
+let autoplay;
+// leggo i btn in input
+const btnStartEl = document.getElementById('start');
+const btnStopEl = document.getElementById('stop');
 
 // - creo una variabile indice
 let index = 0;
@@ -180,11 +194,21 @@ arrowTopEl.addEventListener('click', () => {
 
 // BONUS 2: AUTOPLAY
 // - creo una funzione che cambi la mia immagine aumentando l'indice corrente dopo 3 secondi
-const autoplay = setInterval(incrementImg, 3000);
+autoPlay();
 
 
+// BONUS 3: BUTTONS
+// AL CLICK DEL BOTTONE START
+btnStartEl.addEventListener('click', () => {
+    //  - faccio partire la funzione autoplay
+    autoPlay();
+});
 
-
+// AL CLICK DEL BOTTONE STOP
+btnStopEl.addEventListener('click', () => {
+    // - fermo la funzione autoplay
+    clearInterval(autoplay);
+});
 
 
 
@@ -261,4 +285,8 @@ function decrementImg(){
         // scrivo informazioni dell'immagine
         layerEl.innerHTML = `<h2>${images[index].title}</h2><br><h3>${images[index].text}</h3>`;
     }
+}
+
+function autoPlay(){
+    autoplay = setInterval(incrementImg, 3000);
 }
