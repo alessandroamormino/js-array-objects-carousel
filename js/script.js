@@ -127,8 +127,7 @@ images.forEach((element, index) => {
 const imgSelectedEl = document.querySelectorAll('.thumbnail img');
 imgSelectedEl[0].classList.add('active');
 
-
-// - creo una variabile indice
+// // - creo una variabile indice
 let index = 0;
 
 // // - AL CLICK della freccia in basso 
@@ -149,6 +148,7 @@ arrowBottomEl.addEventListener('click', () => {
         imgSelectedEl[index-1].classList.remove('active');
     }
 });
+
 
 
 // - AL CLICK della freccia in alto 
