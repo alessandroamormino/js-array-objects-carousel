@@ -54,7 +54,8 @@ AL CLICK DELLA FRECCIA IN ALTO
 BONUS: 
 AL CLICK DELL'IMMAGINE THUMBNAIL
     - Cambio la src dell'immagine principale espansa (carousel) sulla base della proprietà image dell'oggetto
-
+    - rimuovo la classe active dalle immagini
+    - assegno la classe active all'immagine thumbnail selezionata
 */
 
 // CODE: 
@@ -98,6 +99,7 @@ const carouselImgEl = document.getElementById('carousel-img');
 const arrowTopEl = document.getElementById('arrow-top');
 const arrowBottomEl = document.getElementById('arrow-bottom');
 const thumbContainerEl = document.getElementById('thumbnails-container');
+let imgSelectedEl;
 
 // - inserire l'ìmmagine di partenza nel carousel
 // parto da quella centrale per styling
@@ -119,19 +121,31 @@ images.forEach((element) => {
             // - inserire le immagini nella thumbnail sulla base delle src dell'array
             newImgThumbEl.src = element[key];
 
+            // Assegno variabile active all'immagine di partenza
+            imgSelectedEl = document.querySelectorAll('.thumbnail img');
+            imgSelectedEl[0].classList.add('active');
+
             // BONUS 1
             // AL CLICK DELL'IMMAGINE THUMBNAIL
-            newImgThumbEl.addEventListener('click', () => {
+            newImgThumbEl.addEventListener('click', function() {
                 // - Cambio la src dell'immagine principale espansa (carousel) sulla base della proprietà image dell'oggetto
                 carouselImgEl.src = element[key];
+
+                // - rimuovo la classe active dalle immagini
+                imgSelectedEl.forEach((element) => {
+                    element.classList.remove('active');
+                });
+
+                // - assegno la classe active all'immagine thumbnail selezionata
+                this.classList.add('active');
             });
         }
     }
 });
 
 // Assegno variabile active all'immagine di partenza
-const imgSelectedEl = document.querySelectorAll('.thumbnail img');
-imgSelectedEl[0].classList.add('active');
+// imgSelectedEl = document.querySelectorAll('.thumbnail img');
+// imgSelectedEl[0].classList.add('active');
 
 // // - creo una variabile indice
 let index = 0;
