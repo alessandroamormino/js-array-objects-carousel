@@ -62,11 +62,13 @@ BONUS 2: AUTOPLAY
 - creo una funzione che cambi la mia immagine aumentando l'indice corrente dopo 3 secondi
 
 BONUS 3: BUTTONS
-- bersaglio i due bottoni creati nel DOM 
+- bersaglio i tre bottoni creati nel DOM 
 AL CLICK DEL BOTTONE START
     - faccio partire la funzione autoplay
 AL CLICK DEL BOTTONE STOP
     - fermo la funzione autoplay
+AL CLICK DEL BOTTONE REVERSE
+    - faccio partire la funzione playreverse
 */
 
 
@@ -115,10 +117,12 @@ const thumbContainerEl = document.getElementById('thumbnails-container');
 const carouselContainer = document.querySelector('.carousel');
 let imgSelectedEl;
 // dichiaro la variabile che mi servirà per gestire la timing function
-let autoplay;
+let play;
+let playReverse;
 // leggo i btn in input
 const btnStartEl = document.getElementById('start');
 const btnStopEl = document.getElementById('stop');
+const btnReverseEl = document.getElementById('reverse');
 
 // - creo una variabile indice
 let index = 0;
@@ -207,7 +211,14 @@ btnStartEl.addEventListener('click', () => {
 // AL CLICK DEL BOTTONE STOP
 btnStopEl.addEventListener('click', () => {
     // - fermo la funzione autoplay
-    clearInterval(autoplay);
+    clearInterval(play);
+    clearInterval(playReverse);
+});
+
+// AL CLICK DEL BOTTONE REVERSE
+btnReverseEl.addEventListener('click', () => {
+    // - fermo la funzione autoplay
+    autoPlayReverse();
 });
 
 
@@ -288,7 +299,13 @@ function decrementImg(array){
 }
 
 function autoPlay(){
-    autoplay = setInterval(() => {
+    play = setInterval(() => {
         incrementImg(images);
+    }, 3000);
+}
+
+function autoPlayReverse(){
+    playReverse = setInterval(() => {
+        decrementImg(images);
     }, 3000);
 }
