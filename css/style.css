@@ -5,12 +5,39 @@
 }
 /* Reset */
 
+body{
+    font-family: sans-serif;
+}
+
+/* Assets */
+.btn{
+    padding: .5em 1.5em;
+    border: none;
+    border-radius: .5em;
+    font-size: 1.1em;
+    background-color: rgb(243, 194, 0);
+
+    margin: 0 .5em;
+
+    transition: all .2s ease-in-out;
+}
+
+.btn:hover{
+    transform: scale(1.05);
+}
+/* /Assets */
+
 .container-centered{
     display: flex;
+    flex-flow: column nowrap;
     justify-content: center;
     align-items: center;
 
     height: 100vh;    
+}
+
+.container-centered .buttons {
+    padding: 2em;
 }
 
 .container-carousel {
