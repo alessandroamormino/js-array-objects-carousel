@@ -51,7 +51,9 @@ AL CLICK DELLA FRECCIA IN ALTO
         - assegno la classe active 
         - rimuovo la classe active dall'indice successivo
 
-
+BONUS: 
+AL CLICK DELL'IMMAGINE THUMBNAIL
+    - Cambio la src dell'immagine principale espansa (carousel) sulla base della proprietà image dell'oggetto
 
 */
 
@@ -102,7 +104,7 @@ const thumbContainerEl = document.getElementById('thumbnails-container');
 carouselImgEl.src = images[0].image;
 
 // - reperisco la src delle immagini dall'array di oggetti
-images.forEach((element, index) => {
+images.forEach((element) => {
     for(let key in element){
         if(key == 'image'){
             // - creo n div quante sono le immagini (5) nell'array
@@ -117,10 +119,14 @@ images.forEach((element, index) => {
             // - inserire le immagini nella thumbnail sulla base delle src dell'array
             newImgThumbEl.src = element[key];
 
+            // BONUS 1
+            // AL CLICK DELL'IMMAGINE THUMBNAIL
+            newImgThumbEl.addEventListener('click', () => {
+                // - Cambio la src dell'immagine principale espansa (carousel) sulla base della proprietà image dell'oggetto
+                carouselImgEl.src = element[key];
+            });
         }
-        
     }
-    
 });
 
 // Assegno variabile active all'immagine di partenza
